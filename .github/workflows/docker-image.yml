@@ -32,8 +32,9 @@ jobs:
           sudo docker login -u abifol -p Pipeline@50
           sudo docker images
           sudo docker push abifol/note-app:v2
-          sudo docker save abifol/note-app:v2 > /home/master-node/
-          cd /home/master-node/ && ls -lart
+          sudo docker save abifol/note-app:v2 > /home/master-node/my_docker.tar
+          cd /home/master-node/
+          ls -lart
 
   deploy:
     needs: publish
