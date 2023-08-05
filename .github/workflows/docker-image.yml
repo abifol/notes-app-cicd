@@ -29,20 +29,24 @@ jobs:
     - uses: actions/checkout@v3
     - name: Publish the Docker image
       run: |
+          npm install -g npm
+          node -v
+          npn -v
           sudo docker login -u abifol -p Pipeline@50
           sudo docker images
           sudo docker push abifol/note-app:v2
-          sudo docker save abifol/note-app:v2 > /home/master-node/my_docker.tar
+          sudo docker save abifol/note-app:v2 > /home/master-node/notes-app-cicd/my_docker.tar
           cd /home/master-node/
           ls -lart
-
+  
   deploy:
     needs: publish
     runs-on: self-hosted
-
+    
     steps:
     - uses: actions/checkout@v3
-    - name: Publish the Docker image
+    - name: Deploy the Docker image
+      if: manual()
       run: |
           cd /home/master-node/
           scp my_docker.tar worker-node1@worker-node1:/home/worker-node1
