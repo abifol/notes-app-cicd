@@ -27,4 +27,5 @@ jobs:
     - name: Publish the Docker image
       run: |
           docker login -u abifol -p Pipeline@50
+          docker images
           docker push abifol/note-app:v2
