@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-     runs-on: ubuntu-latest
+     runs-on: self-hosted
 
      steps:
      - uses: actions/checkout@v3
@@ -20,7 +20,21 @@ jobs:
   
   publish:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Publish the Docker image
+      run: |
+          docker login -u abifol -p Pipeline@50
+          docker images
+          docker push abifol/note-app:v2
+          docker save abifol/note-app:v2 > /home/master-node/
+          cd /home/master-node/ && ls -lart
+
+  deploy:
+    needs: publish
+    runs-on: self-hosted
 
     steps:
     - uses: actions/checkout@v3
