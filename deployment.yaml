@@ -5,7 +5,7 @@ metadata:
   labels:
     app: notes-app
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: notes-app
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: notes-app-deployment
-        image: pavansa/notes-app
+        image: abifol/note-app:v2
         resources:
           requests:
             cpu: "100m"
