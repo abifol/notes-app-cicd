@@ -34,7 +34,7 @@ jobs:
           sudo docker push abifol/note-app:v2
           sudo chmod 777 /home/master-node/notes-app-cicd
           ls -la
-          sudo docker save -o /home/master-node/notes-app-cicd/my_docker.tar >abifol/note-app:v2 > 
+          sudo docker save -o /home/master-node/notes-app-cicd/my_docker.tar > abifol/note-app:v2 
           sudo chmod 777 /home/master-node/notes-app-cicd/my_docker.tar
           cd /home/master-node/
           ls -lart
