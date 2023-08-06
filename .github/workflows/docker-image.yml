@@ -51,4 +51,4 @@ jobs:
           scp my_docker.tar worker-node1@worker-node1:/home/worker-node1
           ssh worker-node1@worker-node1
           pwd
-          ls
+          ls -la
