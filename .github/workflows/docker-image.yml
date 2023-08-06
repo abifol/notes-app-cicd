@@ -14,10 +14,17 @@ jobs:
      - uses: actions/checkout@v3
      - name: Build the Docker image
        run: |
-           sudo docker ps
+           sudo docker rmi abifol/note-app:v2
+           sudo rm notes_app.tar
+           echo "Executing sudo docker ps command"
+           sudo docker ps command
+           echo "Executing pwd command"
            pwd
+           echo "Executing ls -la command"
            ls -la
+           echo "Executing sudo docker build -t abifol/note-app:v2 . command"
            sudo docker build -t abifol/note-app:v2 .
+           echo " Executing sudo docker images command"
            sudo docker images
  
   
@@ -30,14 +37,19 @@ jobs:
     - name: Publish the Docker image
       run: |
           sudo docker login -u abifol -p Pipeline@50
+          echo "Executing sudo docker images command"
           sudo docker images
+          echo "Executing sudo push abifol/note-app:vs2 command"
           sudo docker push abifol/note-app:v2
+          echo "Executing sudo chmod 777 /home/master-node/notes-app-cicd command"
           sudo chmod 777 /home/master-node/notes-app-cicd
+          echo "Executing ls -la command"
           ls -la
-          sudo docker save -o /home/master-node/notes-app-cicd/my_docker.tar > abifol/note-app:v2 
-          sudo chmod 777 /home/master-node/notes-app-cicd/my_docker.tar
-          cd /home/master-node/
-          ls -lart
+          echo "Executing sudo docker save abifol/note-app > /home/master-node/notes-app-cicd/notes_app.tar"
+          sudo docker save abifol/note-app > /home/master-node/notes-app-cicd/notes_app.tar
+          zip note_apps.zip deployment.yaml service.yaml
+          echo "Executing sudo chmod 777 /home/master-node/notes-app-cicd/notes_app.tar command"
+          sudo chmod 777 /home/master-node/notes-app-cicd/notes_app.tar
   
   deploy:
     needs: publish
@@ -47,11 +59,18 @@ jobs:
     - uses: actions/checkout@v3
     - name: Deploy the Docker image
       run: |
-          sudo chmod 777 /home/master-node/notes-app-cicd/my_docker.tar
-          scp /home/master-node/my_docker.tar worker-node1@worker-node1:/home/worker-node1/app
+          sudo chmod 777 /home/master-node/notes-app-cicd/notes_app.tar
+          scp /home/master-node/notes-app-cicd/notes_app.tar worker-node1@worker-node1:/home/worker-node1/app
+          scp /home/master-node/notes-app-cicd/note_apps.zip worker-node1@worker-node1:/home/worker-node1/app
           ssh worker-node1@worker-node1
           cd /home/worker-node1/app
           pwd
           ls -la
-          sudo docker load -i /home/worker-node1/app/my_docker.tar
-          ls -la
+          sudo apt install zip
+          sudo unzip note_apps.zip
+          sudo docker images
+          sudo docker load < my_notes_app.tar
+          sudo docker images
+          sudo kubectl apply -f deployment.yaml && sudo kubectl apply -f service.yaml
+          sudo kubectl get pods -A
+          
