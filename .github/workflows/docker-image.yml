@@ -59,17 +59,14 @@ jobs:
     - name: Deploy the Docker image
       run: |
           cd /home/master-node/notes-app-cicd/
-          scp notes_app.tar note_apps.zip worker-node1@worker-node1:/home/worker-node1/app
+          scp notes_app.tar note_apps.zip worker-node1@worker-node1:/home/worker-node1/app -v
           ssh worker-node1@worker-node1 /bin/bash <<'EOT'
           cd /home/worker-node1/app/
           pwd
           ls -lart
           sudo apt install zip -y
-          sudo unzip note_apps.zip
+          unzip note_apps.zip
           ls -lart
           sudo docker load < notes_app.tar
           sudo docker images
-          sudo kubectl apply -f deployment.yaml 
-          sudo kubectl apply -f service.yaml
-          sudo kubectl get pods -A
           
