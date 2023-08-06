@@ -61,7 +61,7 @@ jobs:
           scp /home/master-node/notes-app-cicd/notes_app.tar worker-node1@worker-node1:/home/worker-node1/app
           scp /home/master-node/notes-app-cicd/note_apps.zip worker-node1@worker-node1:/home/worker-node1/app
           ssh worker-node1@worker-node1
-          cd /home/worker-node1/app
+          cd /home/worker-node1/app/
           pwd
           ls -la
           sudo apt install zip
