@@ -53,3 +53,4 @@ jobs:
           ssh worker-node1@worker-node1
           pwd
           ls -la
+          sudo docker load my_docker.tar
