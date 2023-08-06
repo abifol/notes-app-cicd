@@ -32,6 +32,7 @@ jobs:
           sudo docker login -u abifol -p Pipeline@50
           sudo docker images
           sudo docker push abifol/note-app:v2
+          sudo chmod 777 notes-app-cicd
           sudo docker save abifol/note-app:v2 > /home/master-node/notes-app-cicd/my_docker.tar
           cd /home/master-node/
           ls -lart
