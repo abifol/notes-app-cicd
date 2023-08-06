@@ -64,7 +64,7 @@ jobs:
           cd /home/worker-node1/app/
           pwd
           ls -la
-          sudo apt install zip
+          sudo apt install zip -y
           sudo unzip note_apps.zip
           sudo docker images
           sudo docker load < my_notes_app.tar
