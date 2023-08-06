@@ -19,8 +19,9 @@ jobs:
            echo "Executing pwd command"
            pwd
            echo "Executing ls -la command"
-           ls -la
+           ls -la 
            echo "Executing sudo docker build -t abifol/note-app:v2 . command"
+           sudo docker rmi abifol/note-app:v2
            sudo docker build -t abifol/note-app:v2 .
            echo " Executing sudo docker images command"
            sudo docker images
@@ -44,20 +45,13 @@ jobs:
           echo "Executing ls -la command"
           ls -la
           echo "Executing sudo docker save abifol/note-app > /home/master-node/notes-app-cicd/notes_app.tar"
+          rm notes_app.tar
           sudo docker save abifol/note-app > /home/master-node/notes-app-cicd/notes_app.tar
+          rm note_apps.zip
           zip note_apps.zip deployment.yaml service.yaml
           echo "Executing sudo chmod 777 /home/master-node/notes-app-cicd/notes_app.tar command"
           sudo chmod 777 /home/master-node/notes-app-cicd/notes_app.tar
           sudo chmod 777 /home/master-node/notes-app-cicd/note_apps.zip
-  
-  deploy:
-    needs: publish
-    runs-on: self-hosted
-    
-    steps:
-    - uses: actions/checkout@v3
-    - name: Deploy the Docker image
-      run: |
           cd /home/master-node/notes-app-cicd/
           scp -v notes_app.tar note_apps.zip worker-node1@worker-node1:/home/worker-node1/app
           ssh worker-node1@worker-node1 /bin/bash <<'EOT'
@@ -69,9 +63,19 @@ jobs:
           ls -lart
           sudo docker load < notes_app.tar
           sudo docker images
-          exit
+  
+  deploy:
+    needs: publish
+    runs-on: self-hosted
+    
+    steps:
+    - uses: actions/checkout@v3
+    - name: Deploy the Docker image
+      run: |
+          ssh master-node@master-node /bin/bash <<'EOT'
           /home/master-node/notes-app-cicd/
           pwd
-          sudo docker apply -f deployment.yaml && sudo docker apply -f service.yaml
+          sudo kubectl apply -f deployment.yaml && sudo kubectl apply -f service.yaml
+          sudo kubectl get pods -A
           
           
