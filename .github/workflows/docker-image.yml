@@ -63,11 +63,12 @@ jobs:
           ssh worker-node1@worker-node1 /bin/bash <<'EOT'
           cd /home/worker-node1/app/
           pwd
-          ls -la
+          ls -lart
           sudo apt install zip -y
-          sudo unzip notes_apps.zip
+          sudo unzip note_apps.zip
+          ls -lart
           sudo docker images
-          sudo docker load < my_notes_app.tar
+          sudo docker load < notes_app.tar
           sudo docker images
           sudo kubectl apply -f deployment.yaml && sudo kubectl apply -f service.yaml
           sudo kubectl get pods -A
