@@ -45,9 +45,7 @@ jobs:
           echo "Executing ls -la command"
           ls -la
           echo "Executing sudo docker save abifol/note-app > /home/master-node/notes-app-cicd/notes_app.tar"
-          rm notes_app.tar
           sudo docker save abifol/note-app > /home/master-node/notes-app-cicd/notes_app.tar
-          rm note_apps.zip
           zip note_apps.zip deployment.yaml service.yaml
           echo "Executing sudo chmod 777 /home/master-node/notes-app-cicd/notes_app.tar command"
           sudo chmod 777 /home/master-node/notes-app-cicd/notes_app.tar
