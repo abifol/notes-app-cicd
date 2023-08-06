@@ -59,7 +59,7 @@ jobs:
     - name: Deploy the Docker image
       run: |
           cd /home/master-node/notes-app-cicd/
-          scp notes_app.tar note_apps.zip worker-node1@worker-node1:/home/worker-node1/app -v
+          scp -v notes_app.tar note_apps.zip worker-node1@worker-node1:/home/worker-node1/app
           ssh worker-node1@worker-node1 /bin/bash <<'EOT'
           cd /home/worker-node1/app/
           pwd
@@ -69,4 +69,9 @@ jobs:
           ls -lart
           sudo docker load < notes_app.tar
           sudo docker images
+          exit
+          /home/master-node/notes-app-cicd/
+          pwd
+          sudo docker apply -f deployment.yaml && sudo docker apply -f service.yaml
+          
           
