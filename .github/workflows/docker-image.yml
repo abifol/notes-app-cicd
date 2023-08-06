@@ -65,7 +65,7 @@ jobs:
           pwd
           ls -lart
           sudo apt install zip -y
-          sudo unzip note_apps.zip
+          sudo unzip note_apps.zip -y
           ls -lart
           sudo docker images
           sudo docker load < notes_app.tar
