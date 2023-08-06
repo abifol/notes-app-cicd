@@ -48,6 +48,7 @@ jobs:
           zip note_apps.zip deployment.yaml service.yaml
           echo "Executing sudo chmod 777 /home/master-node/notes-app-cicd/notes_app.tar command"
           sudo chmod 777 /home/master-node/notes-app-cicd/notes_app.tar
+          sudo chmod 777 /home/master-node/notes-app-cicd/note_apps.zip
   
   deploy:
     needs: publish
@@ -57,9 +58,8 @@ jobs:
     - uses: actions/checkout@v3
     - name: Deploy the Docker image
       run: |
-          sudo chmod 777 /home/master-node/notes-app-cicd/notes_app.tar
-          scp /home/master-node/notes-app-cicd/notes_app.tar worker-node1@worker-node1:/home/worker-node1/app
-          scp /home/master-node/notes-app-cicd/note_apps.zip worker-node1@worker-node1:/home/worker-node1/app
+          cd /home/master-node/notes-app-cicd/
+          scp notes_app.tar note_apps.zip worker-node1@worker-node1:/home/worker-node1/app
           ssh worker-node1@worker-node1 /bin/bash <<'EOT'
           cd /home/worker-node1/app/
           pwd
@@ -67,7 +67,6 @@ jobs:
           sudo apt install zip -y
           sudo unzip note_apps.zip -y
           ls -lart
-          sudo docker images
           sudo docker load < notes_app.tar
           sudo docker images
           sudo kubectl apply -f deployment.yaml && sudo kubectl apply -f service.yaml
