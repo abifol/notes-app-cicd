@@ -61,9 +61,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Deploy the Docker image
       run: |
-          cd /home/master-node/notes-app-cicd/
+          cd /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd/
           pwd
           sudo kubectl apply -f deployment.yaml && sudo kubectl apply -f service.yaml
           sudo kubectl get pods -A
-          
-          
