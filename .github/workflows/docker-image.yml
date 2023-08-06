@@ -52,14 +52,6 @@ jobs:
           sudo chmod 777 /home/master-node/notes-app-cicd/note_apps.zip
           cd /home/master-node/notes-app-cicd/
           scp -v notes_app.tar note_apps.zip worker-node1@worker-node1:/home/worker-node1/app
-          ssh worker-node1@worker-node1 /bin/bash <<'EOT'
-          cd /home/worker-node1/app/
-          pwd
-          ls -lart
-          sudo apt install zip -y
-          ls -lart
-          sudo docker load < notes_app.tar
-          sudo docker images
   
   deploy:
     needs: publish
