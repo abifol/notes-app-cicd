@@ -29,7 +29,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Publish the Docker image
       run: |
-          npm install -g npm
+          #npm install -g npm
           node -v
           npn -v
           sudo docker login -u abifol -p Pipeline@50
