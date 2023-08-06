@@ -65,10 +65,11 @@ jobs:
           pwd
           ls -lart
           sudo apt install zip -y
-          sudo unzip note_apps.zip -y
+          sudo unzip note_apps.zip
           ls -lart
           sudo docker load < notes_app.tar
           sudo docker images
-          sudo kubectl apply -f deployment.yaml && sudo kubectl apply -f service.yaml
+          sudo kubectl apply -f deployment.yaml 
+          sudo kubectl apply -f service.yaml
           sudo kubectl get pods -A
           
