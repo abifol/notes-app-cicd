@@ -73,8 +73,11 @@ jobs:
           sudo chmod 777 /home/master-node/notes-app-cicd/note_apps.zip
           cd /home/master-node/notes-app-cicd/
           scp -v notes_app.tar note_apps.zip worker-node1@worker-node1:/home/worker-node1/app
+
   
   deploy:
+    environment:
+     name: production
     needs: publish
     runs-on: self-hosted
     
