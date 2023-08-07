@@ -76,9 +76,9 @@ jobs:
 
   
   deploy:
+    needs: publish
     environment:
      name: production
-    needs: publish
     runs-on: self-hosted
     
     steps:
