@@ -21,7 +21,6 @@ jobs:
            echo "Executing ls -la command"
            ls -la 
            echo "Executing sudo docker build -t abifol/note-app:v2 . command"
-           sudo docker rmi abifol/note-app:v2
            sudo docker build -t abifol/note-app:v2 .
            echo " Executing sudo docker images command"
            sudo docker images
