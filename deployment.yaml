@@ -17,6 +17,13 @@ spec:
       containers:
       - name: notes-app-deployment
         image: abifol/note-app:v2
+        volumeMounts:
+        - mountPath: /var/lib/docker/volumes/data/_data
+          name: data
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: volume-claim
         resources:
           requests:
             cpu: "100m"
