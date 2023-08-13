@@ -20,8 +20,8 @@ jobs:
            pwd
            echo "Executing ls -la command"
            ls -la 
-           echo "Executing sudo docker build -t abifol/note-app:v2 . command"
-           sudo docker build -t abifol/note-app:v2 .
+           echo "Executing sudo docker build -t abifol/note-app:v3 . command"
+           sudo docker build -t abifol/note-app:v3 .
            echo " Executing sudo docker images command"
            sudo docker images
 
@@ -57,7 +57,7 @@ jobs:
       run: |
           sudo docker login -u abifol -p Pipeline@50
           sudo docker images
-          sudo docker push abifol/note-app:v2
+          sudo docker push abifol/note-app:v3
           sudo chmod 777 /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd
           ls -la
           sudo docker save abifol/note-app > /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd/notes_app.tar
