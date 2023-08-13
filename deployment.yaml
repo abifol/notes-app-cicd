@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: notes-app-deployment
-        image: abifol/note-app:v2
+        image: abifol/note-app:v3
         resources:
           requests:
             cpu: "100m"
