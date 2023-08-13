@@ -11,7 +11,7 @@ COPY package*.json ./
 RUN npm install
 
 # Copy all files to the container
-COPY . .
+COPY . ./
 
 # Expose port 3000
 EXPOSE 3000
