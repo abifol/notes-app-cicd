@@ -17,7 +17,7 @@ jobs:
            echo "Executing sudo docker ps command"
            whoami
            sudo docker images
-           sudo docker image  prune
+           sudo docker image prune
            sudo docker ps
            echo "Executing pwd command"
            pwd
@@ -83,6 +83,5 @@ jobs:
       run: |
           cd /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd
           pwd
-          ls -lrth
-          sudo kubectl apply -f deployment.yaml && sudo kubectl apply -f service.yaml
-          sudo kubectl get pods -A
+          kubectl apply -f deployment.yaml && sudo kubectl apply -f service.yaml
+          kubectl get pods -A
