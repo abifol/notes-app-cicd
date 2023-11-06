@@ -15,6 +15,7 @@ jobs:
      - name: Build the Docker image
        run: |
            echo "Executing sudo docker ps command"
+           whoami
            sudo docker images
            sudo docker image  prune
            sudo docker ps
