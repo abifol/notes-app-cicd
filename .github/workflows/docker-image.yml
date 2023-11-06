@@ -15,8 +15,8 @@ jobs:
      - name: Build the Docker image
        run: |
            echo "Executing sudo docker ps command"
-           docker images
-           docker prune images
+           sudo docker images
+           sudo docker prune images
            sudo docker ps
            echo "Executing pwd command"
            pwd
