@@ -20,7 +20,7 @@ jobs:
            sudo docker ps
            pwd
            ls -la 
-           sudo docker build -t abifol/note-app:$DOCKER_VERSION .
+           sudo docker build -t abifol/note-app:"$DOCKER_VERSION" .
            sudo docker images
 
   njsscan:
@@ -55,7 +55,7 @@ jobs:
       run: |
           sudo docker login -u abifol -p Pipeline@50
           sudo docker images
-          sudo docker push abifol/note-app:$DOCKER_VERSION
+          sudo docker push abifol/note-app:"$DOCKER_VERSION"
           sudo chmod 777 /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd
           ls -la
           sudo docker save abifol/note-app > /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd/notes_app.tar
