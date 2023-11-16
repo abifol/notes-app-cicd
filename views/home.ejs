@@ -1,49 +1,71 @@
 <!DOCTYPE html>
 <html>
-
+<meta name="viewport" content="width=device-width,intial-scale=1.0">
 <head>
-	<marquee> Welcome to Note Keeper</marquee>
-	<title>Note Keeper</title>
+<style>
+*{
+ box-sizing:border-box;
+}
+.menu{
+  background-color: lightblue;
+  float: left;
+  width: 30%;
+}
+.menu a{
+  display: block;
+  color: blue;
+  margin-top: 7px;
+  width: 100%;
+  padding: 8px;
+  background-color:lavender;
+}
+.main{
+  padding: 0 20px;
+  float: left;
+  width: 100%;
+  background-color: blue;
+}
+.right{
+  display: block;
+  color: red;
+  margin-top: 7px;
+  width: 100%;
+  padding: 15px;
+  background-color:#e5e5e5;
+}
+
+@media screen and(max-width:620px){
+   .menu, .main,.right{
+      width:100%;
+   }
+}
+</style>
 </head>
+<body style="font-family:Tahooma;color:green">
 
-<body>
-	<marquee> Welcome to Note Keeper</marquee>
-	<h1>Note Keepers</h1>
+<div style="background-color:#e5e5e5;padding:15px;text-align:center;">
+   <h1>FACEBOOK</h1>
+</div>
 
-	<div style="display: flex;">
+<div  style="overflow:auto">
+       <div class="menu">
+	      <a href="https://web.facebook.com/home.php">Home</a>
+	      <a href="https://web.facebook.com/watch/?ref=tab">Videos</a>
+		  <a href="https://web.facebook.com/marketplace/?ref=app_tab">Market</a>
+		  <a href="https://web.facebook.com/groups/feed/">Group</a>
+		  
+<div class="main">
+     <h2>FACEBOOK</h2>
+     <p>Create a welcome post that includes details about your business and why people should like your Page. Provide information about what you'll share, like special offers, updates about your business and more.
+     </p>
+</div>
 
-		<% data.forEach(element=> { %>
+<div class="right">
+    <h2>About</h2>
+	<p>Connecting people</p>
+</div>
+</div>
 
-			<form action="/update" method="post">
-				<input type="number" style="display: none;"
-					name="noteId" value="<%= element.noteId %>">
-				<textarea type="text" rows="6" cols="30"
-						placeholder="Type Here..." name="noteContent"
-					value="<%= element.noteContent %>">
-					<%= element.noteContent %></textarea>
-				<br>
-				<button type="submit">Update</button>
-			</form>
-
-			<form action="/delete" method="post">
-				<input type="number" style="display: none;"
-					name="noteId" value="<%= element.noteId %>">
-				<button type="submit"
-						style="margin: 0px 4px;">✕</button>
-			</form>
-			<% }) %>
-	</div>
-
-	<h1>Add Note</h1>
-	<form action="/" method="post">
-		<input type="number" style="display: none;"
-			name="noteId">
-		<textarea type="text" rows="6" cols="30"
-				placeholder="Type Here..."
-				name="noteContent"></textarea>
-		<br>
-		<button type="submit">Add</button>
-	</form>
-</body>
-
+<div style="background-color:#e5e5e5;text-align:center;padding:10px;margin-top:7px;">© copyright Facebook.com</div>
+</body>	
 </html>
