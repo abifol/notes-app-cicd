@@ -16,7 +16,7 @@ jobs:
        run: |
            whoami
            sudo docker images
-           sudo docker images prune
+           sudo docker rmi $(docker images -a -q)
            sudo docker ps
            pwd
            ls -la 
