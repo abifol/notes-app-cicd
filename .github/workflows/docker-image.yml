@@ -4,7 +4,7 @@ on:
   workflow_dispatch
 
 env:
-  DOCKER_VERSION: V4
+  DOCKER_VERSION: V5
 
 jobs:
   build:
@@ -59,11 +59,11 @@ jobs:
           sudo chmod 777 /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd
           ls -la
           sudo docker save abifol/note-app > /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd/notes_app.tar
-          zip note_apps.zip deployment.yaml service.yaml
-          sudo chmod 777 /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd/notes_app.tar
-          sudo chmod 777 /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd/note_apps.zip
-          cd /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd
-          scp -v notes_app.tar note_apps.zip worker-node1@worker-node1:/home/worker-node1/app
+          # zip note_apps.zip deployment.yaml service.yam
+          # sudo chmod 777 /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd/notes_app.tar
+          # sudo chmod 777 /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd/note_apps.zip
+          # cd /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd
+          # scp -v notes_app.tar note_apps.zip worker-node1@worker-node1:/home/worker-node1/app
 
   
   deploy:
