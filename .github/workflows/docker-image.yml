@@ -20,6 +20,7 @@ jobs:
            sudo docker ps
            pwd
            ls -la 
+           cd /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd/
            sudo docker build -t abifol/note-app:"$DOCKER_VERSION" .
            sudo docker images
 
