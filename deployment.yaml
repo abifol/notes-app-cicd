@@ -16,7 +16,14 @@ spec:
     spec:
       containers:
       - name: notes-app-deployment
-        image: abifol/note-app:V5.1.1
+        image: abifol/note-app:V5.1.2
+        volumeMounts:
+        - mountPath: /mnt/data/docker
+          name: demo-pv
+  volumes:
+    - name: demo-pv
+      persistentVolumeClaim:
+        claimName: demo-pv
         resources:
           requests:
             cpu: "100m"
