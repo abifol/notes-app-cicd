@@ -1,0 +1,24 @@
+name: Docker Image CI
+
+on:
+  workflow_dispatch
+
+env:
+  DOCKER_VERSION: V5.1.2
+
+jobs:
+
+  deploy:
+    environment:
+     name: production
+    runs-on: self-hosted
+    
+    steps:
+    - uses: actions/checkout@v3
+    - name: Deploy the Docker image
+      run: |
+          cd /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd
+          pwd
+          kubectl get pods -A
+          kubectl apply -f deployment.yaml && kubectl apply -f service.yaml
+          kubectl get pods -A
