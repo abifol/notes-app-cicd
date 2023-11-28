@@ -1,71 +1,120 @@
 <!DOCTYPE html>
 <html>
-<meta name="viewport" content="width=device-width,intial-scale=1.0">
 <head>
+
+ <link rel="shortcut icon" type="image/png" href="download.png 2.png">
+ 
 <style>
-*{
- box-sizing:border-box;
-}
-.menu{
-  background-color: lightblue;
-  float: left;
-  width: 30%;
-}
-.menu a{
-  display: block;
-  color: red;
-  margin-top: 7px;
-  width: 100%;
-  padding: 8px;
-  background-color:lavender;
-}
-.main{
-  padding: 0 20px;
-  float: left;
-  width: 100%;
-  background-color: blue;
-}
-.right{
-  display: block;
-  color: red;
-  margin-top: 7px;
-  width: 100%;
-  padding: 15px;
-  background-color:#e5e5e5;
+* {
+   list-style-type: none;
+   margin: 0px;
+   padding: 0px;
+   overflow: hiddden;
+   background-color: midnightblue;
 }
 
-@media screen and(max-width:620px){
-   .menu, .main,.right{
-      width:100%;
-   }
+li {
+  float: right;
 }
+
+li a {
+   display: inline-block;
+   color: white;
+   text-align: centers;
+   padding: 15px 16px;
+   text-decoration: none;
+   margin-left: 20px;
+}
+li a:hover{
+   background-color: #111;
+}
+.active{
+  background-color: midnightblue;
+}
+h1{
+  color: white;
+  padding: 90px;
+  text-align: center;
+  font-family: san serif;
+  font-size: 45px;
+  margin: 0.01px;
+  margin-top: 15px;
+}
+p{
+  color: white;
+  padding: 0px 20px;
+  text-align: center;
+  font-family: san serif;
+  font-size: 15px;
+  margin: 0px 10px;
+}
+
+img{
+  float: left;
+  padding: 35px;
+}
+
+form{
+
+}
+input[type=email]{
+  width: 15%;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: white;
+  position: absolute;
+  top: 75%;
+  left: 28%;
+  border: 1px solid white;
+}
+
+input[type=Password]{
+  width: 15%;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: lightblue;
+  position: absolute;
+  top: 75%;
+  left: 45%;
+  border: 1px solid white;
+} 
+
+input[type=submit] {
+  width: 5%;
+  padding: 10px;
+  display: block;
+  border-radius: 20px;
+  background-color: white;
+  position: absolute;
+  top: 75%;
+  left: 63%;
+  border: 1px solid white;
+}
+
+
 </style>
 </head>
-<body style="font-family:Tahooma;color:white">
+<body>
 
-<div style="background-color:#e5e5e5;padding:15px;text-align:center;">
-   <h1>Facebook</h1>
-</div>
+<img src="C:\Users\Dorcas\Desktop\html v\download.png 2.png"> 
 
-<div  style="overflow:auto">
-       <div class="menu">
-	      <a href="https://web.facebook.com/home.php">Home</a>
-	      <a href="https://web.facebook.com/watch/?ref=tab">Videos</a>
-		  <a href="https://web.facebook.com/marketplace/?ref=app_tab">Market</a>
-		  <a href="https://web.facebook.com/groups/feed/">Group</a>
-		  
-<div class="main">
-     <h2>Facebook</h2>
-     <p>Create a welcome post that includes details about your business and why people should like your Page. Provide information about what you'll share, like special offers, updates about your business and more.
-     </p>
-</div>
+<ul>
+  <li><a href="https://twitter.com/home" class="active">How It Works</a></li>
+  <li><a href="https://twitter.com/explore" class="active">Pricing</a></li>
+  <li><a href="https://twitter.com/notifications" class="active">Blog</a></li>
+  <li><a href="https://twitter.com/messages" class="active">Docs</a></li>
+  <li><a href="https://twitter.com/DorcasT18192/lists" class="active">Log In</a></li>
+  <li><a href="https://twitter.com/DorcasT18192/communities" class="active">Sign In</a></li>
+</ul><br>
+<h1><span style="color:lightblue;font-weight:bold;">Optimize conversions</span> on<br> Your clients'landing pages<br>with the help of <span style="color:lightblue;font-weight:bold;">Al</span><span style="color:red;font-weight:bold;">.</span></h1>
+<p> ABtesting.ai uses Artificial Intelligence to create the easiest, quickest and most efficient<br>landing page A/B testing experience, Welcome to automation.</p> <br><br>
 
-<div class="right">
-    <h2>About</h2>
-	<p>Connecting people</p>
-</div>
-</div>
-
-<div style="background-color:#e5e5e5;text-align:center;padding:10px;margin-top:7px;">© copyright Facebook.com</div>
-</body>	
+<form>
+    <label for="email"></label>
+	<input type="email" id="email" name="email" placeholder=" email..">   
+	<label for="pwd"></label>
+	<input type="password" id="pwd" name="pwd" placeholder=" Password">
+	<input type="submit" value="submit">
+</form>
+</body>
 </html>
