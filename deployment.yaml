@@ -16,10 +16,20 @@ spec:
     spec:
       containers:
       - name: notes-app-deployment
-        image: abifol/note-app:V6.1.4
+        image: abifol/note-app:V6.1.5
         resources:
           requests:
             cpu: "100m"
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
+        volumeMounts:
+        - mountPath: /mnt
+          name: test-volume
+      volumes:
+      - name: test-volume
+        hostPath:
+          # directory location on host
+          path: /mnt
+          # this field is optional
+          type: Directory
