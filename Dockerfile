@@ -13,7 +13,7 @@ RUN npm install
 # Copy all files to the container
 COPY . ./
 
-COPY photo.jpg /mnt/data/docker/
+COPY *.jpg /app/images/
 
 # Expose port 3000
 EXPOSE 3000
