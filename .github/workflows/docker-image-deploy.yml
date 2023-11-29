@@ -4,7 +4,7 @@ on:
   workflow_dispatch
 
 env:
-  DOCKER_VERSION: V6.1.5
+  DOCKER_VERSION: V6.1.6
 
 jobs:
 
