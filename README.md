@@ -31,4 +31,4 @@ npm test
 Test content
 
 
-Demo for Madam Olusola
+Demo for Madam Olusola's class
