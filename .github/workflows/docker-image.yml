@@ -1,67 +1,84 @@
-name: Docker Image Build, Scan, Publish.
+name: Docker Image Build, Scan, Publish
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
 
 env:
   DOCKER_VERSION: V6.2.3
 
 jobs:
-  build:
-     runs-on: self-hosted
 
-     steps:
-     - uses: actions/checkout@v3
-     - name: Build the Docker image
-       run: |
-           whoami
-           sudo docker images
-           sudo docker rmi $(docker images -a -q)
-           sudo docker ps
-           pwd
-           ls -la 
-           cd /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd/
-           sudo docker build -t abifol/note-app:"$DOCKER_VERSION" .
-           sudo docker images
+  build:
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Build the Docker image
+      run: |
+        whoami
+        sudo docker images
+        
+        # Remove ONLY untagged images instead of deleting everything
+        sudo docker rmi $(docker images -f "dangling=true" -q) || true
+        
+        sudo docker ps
+        ls -la
+        
+        cd "$GITHUB_WORKSPACE"
+        echo "Current directory: $(pwd)"
+        
+        sudo docker build -t abifol/note-app:"$DOCKER_VERSION" .
+        sudo docker images
+
 
   njsscan:
     needs: build
     permissions:
-      contents: read # for actions/checkout to fetch code
-      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
-      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
+      contents: read
+      security-events: write
+      actions: read
     runs-on: ubuntu-latest
     name: njsscan code scanning
+
     steps:
-    - name: Checkout the code
+    - name: Checkout code
       uses: actions/checkout@v3
-    - name: nodejsscan scan
+
+    - name: NodeJSSCAN scan
       id: njsscan
       uses: ajinabraham/njsscan-action@7237412fdd36af517e2745077cedbf9d6900d711
       with:
         args: '. --sarif --output results.sarif || true'
+
     - name: Upload njsscan report
       uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: results.sarif
- 
-  
+
+
   publish:
     needs: njsscan
     runs-on: self-hosted
 
     steps:
     - uses: actions/checkout@v3
-    - name: Publish the Docker image
+
+    - name: Login to Docker Hub
       run: |
-          sudo docker login -u abifol -p Pipeline@50
-          sudo docker images
-          sudo docker push abifol/note-app:"$DOCKER_VERSION"
-          sudo chmod 777 /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd
-          ls -la
-          sudo docker save abifol/note-app > /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd/notes_app.tar
-          # zip note_apps.zip deployment.yaml service.yam
-          # sudo chmod 777 /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd/notes_app.tar
-          # sudo chmod 777 /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd/note_apps.zip
-          # cd /home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd
-          # scp -v notes_app.tar note_apps.zip worker-node1@worker-node1:/home/worker-node1/app
+        echo "${{ secrets.DOCKER_PASSWORD }}" | sudo docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+    - name: Push the Docker image
+      run: |
+        sudo docker images
+        sudo docker push abifol/note-app:"$DOCKER_VERSION"
+
+    - name: Save image as tar file
+      run: |
+        WORKDIR="/home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd"
+        sudo chmod 777 "$WORKDIR"
+
+        echo "Saving Docker image..."
+        sudo docker save abifol/note-app:"$DOCKER_VERSION" -o "$WORKDIR/notes_app.tar"
+
+        ls -la "$WORKDIR"
