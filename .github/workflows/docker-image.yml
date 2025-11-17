@@ -75,7 +75,7 @@ jobs:
 
     - name: Save image as tar file
       run: |
-        WORKDIR="/home/master-node/actions-runner/_work/notes-app-cicd/notes-app-cicd"
+        WORKDIR="/home/master/actions-runner/_work/notes-app-cicd/notes-app-cicd"
         sudo chmod 777 "$WORKDIR"
 
         echo "Saving Docker image..."
